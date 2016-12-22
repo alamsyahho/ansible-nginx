@@ -1,0 +1,20 @@
+---
+- name: include os specific variables
+  include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+  
+- name: install monit
+  yum:
+    name: monit
+    state: present
+
+- name: copy monit config
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dst }}"
+  with_items:
+    - src: monit.conf.j2
+      dst: "{{ monit_config_file }}"
+    - src: monit_nginx
+      dst: /etc/monit.d/nginx
+  notify:
+    - restart monit

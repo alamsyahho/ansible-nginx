@@ -1,0 +1,6 @@
+# nginx
+check process nginx with pidfile /var/run/nginx.pid
+start program = "/sbin/service nginx start"
+stop  program = "/sbin/service nginx stop"
+if failed host 127.0.0.1 port 80 then restart
+if cpu is greater than 50% for 2 cycles then alert

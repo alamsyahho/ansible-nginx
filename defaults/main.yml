@@ -1,0 +1,3 @@
+---
+# Nginx version to install. By default, will install the latest stable version
+nginx_version: nginx
